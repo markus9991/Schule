@@ -13,7 +13,7 @@ public class Batch {
 	public Batch(){
 		for(int i=0;i<anzDecks;i++){
 			for (int j = 0; j < farben; j++) {
-				for (int k = 0; k < nummern; k++) {
+				for (int k = 1; k <= nummern; k++) {
 					Karten[zähler]=new Card(j, k);
 					zähler++;
 				}

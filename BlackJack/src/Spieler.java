@@ -5,18 +5,22 @@ public class Spieler {
 	private String name;
 	private ArrayList<Card> karten = new ArrayList<Card>();
 	private Batch batch;
+	private boolean croupier=false;
 
 	public Spieler(String name) {
 		this.name = name;
 	}
 
+	public void setCroupier(){
+		this.croupier=true;
+	}
+	
 	public boolean hitKarte() {
-		if (this.getWert() < 17) {
+		boolean sollZiehen= BJLogik.KarteZiehen(croupier, karten);
+		if(sollZiehen==true){
 			karten.add(batch.karteZiehen());
 			return true;
-		} else {
-			return false;
-		}
+		}else{return false;}
 	}
 
 	public void setBatch(Batch batch) {
@@ -24,24 +28,7 @@ public class Spieler {
 	}
 
 	public int getWert() {
-		int wert = 0;
-		for (Card k : karten) {
-			switch(k.getValue()){
-			case 11: 
-				wert+=10;
-				break;
-			case 12: 
-				wert+=10;
-				break;
-			case 13: 
-				wert+=10;
-				break;
-			default:
-				wert += k.getValue();
-			}
-			
-		}
-		return wert;
+		return BJLogik.wertErmitteln(karten,croupier);
 	}
 
 	public String printHand() {

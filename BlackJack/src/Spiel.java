@@ -12,6 +12,7 @@ public class Spiel {
 	public Spiel(String name, Spieler croupier, Batch batch) {
 		this.batch = batch;
 		croupier.setBatch(this.batch);
+		croupier.setCroupier();
 		this.croupier=croupier;
 		this.name = name;
 		System.out.println("Das Spiel "+ this.name+ " wurde ergolgreich initialisiert und kann nun besetzt werden");
@@ -64,25 +65,17 @@ public class Spiel {
 	}
 
 	public void auswerten() {
-		Spieler gewinner=null;
-		if (croupier.getWert()<22) {
-			gewinner=this.croupier;
-		}
-		else{
-			gewinner=new Spieler("Dummie");
-		}
 		
-		System.out.println("Der Croupier hat erreicht: "+croupier.getWert());
-		for (Spieler s : mitspieler) {
-			System.out.println("Spieler "+s.getName()+" hat errreicht: "+s.getWert());
-			if(s.getWert()>gewinner.getWert()&&s.getWert()<22){
-				gewinner=s;
-			}
+		for (Spieler sp : mitspieler) {
+			System.out.println(sp.getName()+": "+sp.getWert());
 		}
-			
+		System.out.println(croupier.getName()+": "+croupier.getWert());
 		
-		
-		System.out.println("Und gewonnen hat: "+gewinner.getName());
+		ArrayList<Spieler> gewinner=BJLogik.evaluiereGewinner(croupier, mitspieler);
+		System.out.println("Und gewonnen hat: ");
+		for (Spieler g : gewinner) {
+			System.out.println(g.getName());
+		}
 	}
 
 	public void beendeSpiel() {
