@@ -8,8 +8,10 @@ public class Spiel {
 	private Spieler croupier;
 	private ArrayList<Spieler> mitspieler = new ArrayList<Spieler>();
 	private Batch batch;
+	private Bank bank;
 
-	public Spiel(String name, Spieler croupier, Batch batch) {
+	public Spiel(String name, Spieler croupier, Batch batch,Bank bank) {
+		this.bank=bank;
 		this.batch = batch;
 		croupier.setBatch(this.batch);
 		croupier.setCroupier();
@@ -18,7 +20,7 @@ public class Spiel {
 		System.out.println("Das Spiel "+ this.name+ " wurde ergolgreich initialisiert und kann nun besetzt werden");
 	}
 
-	public void addSpieler(Spieler spieler) {
+	public void addSpieler(Spieler spieler,int Einsatz) {
 		if (this.spielläuft == false) {
 			spieler.setBatch(this.batch);
 			mitspieler.add(spieler);
@@ -28,7 +30,7 @@ public class Spiel {
 		}
 	}
 	
-	public void starteSpiel(){
+	public void starteRunde(){
 		this.spielläuft=true;
 		croupier.hitKarte();
 		
@@ -78,7 +80,7 @@ public class Spiel {
 		}
 	}
 
-	public void beendeSpiel() {
+	public void beendeRunde() {
 		this.batch.reset();
 		this.spielläuft=false;
 		
