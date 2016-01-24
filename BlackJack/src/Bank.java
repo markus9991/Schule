@@ -15,9 +15,19 @@ public class Bank {
 	}
 	
 	public void setzen(Spieler spieler,int höhe){
-		for (Spieler s:this.spieler) {
-			if(this.spieler.equals(spieler)){
-			}
+
+			
+			int index=0;
+			for (Spieler sp:this.spieler) {
+				if(sp.equals(spieler)){
+					break;
+				}else{index+=1;}
+			
+			
+			
+			
+				pot+=Einsätze.get(index);
+			
 		}
 	}
 

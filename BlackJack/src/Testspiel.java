@@ -8,7 +8,7 @@ public class Testspiel {
 		Batch batch=new Batch();
 		Bank bank=new Bank();
 		
-//		Card[] K=b.getKarten();
+//		Card[] K=batch.getKarten();
 //		
 //		for (Card k : K) {
 //			System.out.println(k);
@@ -17,9 +17,9 @@ public class Testspiel {
 //		ArrayList<Card> karten=new ArrayList<Card>();
 //		karten.add(new Card(1, 6));
 //		karten.add(new Card(1, 11));
-//	//	karten.add(new Card(1, 1));
+//		karten.add(new Card(1, 1));
 //		
-//		System.out.println(BJLogik.wertErmitteln(karten));
+//		System.out.println(BJLogik.wertErmitteln(karten,false));
 //		System.out.println(BJLogik.KarteZiehen(false, karten));
 //		System.out.println(BJLogik.KarteZiehen(true, karten));
 		
@@ -38,6 +38,7 @@ public class Testspiel {
 		spiel1.addSpieler(s5,1200);
 		
 		spiel1.starteRunde();
+		spiel1.spielerSetzen();
 		System.out.println(spiel1.printSpiel());
 		spiel1.spielerziehenKarten();
 		spiel1.croupierZiehtKarten();

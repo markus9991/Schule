@@ -41,6 +41,10 @@ public class Spiel {
 		}
 	}
 	
+	public void spielerSetzen(){
+		
+	}
+	
 	public void spielerziehenKarten(){
 		do{
 			spielerwollenmehrkarten=false;
