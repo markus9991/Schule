@@ -16,7 +16,6 @@ public class Poker {
 		int[] results=new int[10];
 		
 		for( int i=0;i<howoften;i++){
-			boolean already=false;
 			hand=batch.getSortedHand();
 			
 			if(Tools.isRoyalFlush(hand)){
