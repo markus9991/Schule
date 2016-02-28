@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/tv1"
+        android:text="no Data avaiable..." />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="API-Aufruf"
+            android:id="@+id/button"
+            android:onClick="myClickHandler"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sonnenaufgang:"
+            android:id="@+id/tvauf"
+            android:layout_toStartOf="@+id/button"
+            android:layout_alignParentTop="true"
+            android:textSize="16dp"
+            android:layout_toLeftOf="@+id/button" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:ems="10"
+            android:id="@+id/dateauf"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/tvunter"
+            android:layout_toRightOf="@+id/tvunter" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sonnenuntergang:"
+            android:id="@+id/tvunter"
+            android:layout_alignLeft="@+id/tvauf"
+            android:layout_alignStart="@+id/tvauf"
+            android:layout_below="@+id/dateauf"
+            android:textSize="16dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:ems="10"
+            android:id="@+id/dateunter"
+            android:layout_alignTop="@+id/tvunter"
+            android:layout_toRightOf="@+id/tvunter"
+            android:layout_toEndOf="@+id/tvunter" />
+    </RelativeLayout>
+
+</LinearLayout>
