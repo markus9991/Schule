@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.markus.databaseapp.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Was willst du tun?"
+        android:id="@+id/tv_main"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="98dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eintragen"
+        android:id="@+id/b_main_ein"
+        android:layout_below="@+id/tv_main"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abfragen"
+        android:id="@+id/b_main_ab"
+        android:layout_alignBottom="@+id/b_main_ein"
+        android:layout_toRightOf="@+id/b_main_ein"
+        android:layout_toEndOf="@+id/b_main_ein" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Löschen"
+        android:id="@+id/b_main_lo"
+        android:layout_alignBottom="@+id/b_main_ab"
+        android:layout_toRightOf="@+id/b_main_ab"
+        android:layout_toEndOf="@+id/b_main_ab" />
+</RelativeLayout>
