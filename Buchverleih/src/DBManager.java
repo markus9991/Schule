@@ -1,0 +1,67 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
+public class DBManager {
+	
+	private static DBManager instance;
+	private Connection c;
+	
+	private DBManager() throws SQLException, ClassNotFoundException{
+		Class.forName("com.mysql.jdbc.Driver");
+		 c =DriverManager.getConnection("jdbc:mysql://localhost/buchverleih","root","");
+	}
+	
+	public static DBManager getDBManager(){
+		if(instance==null)
+			try {
+				instance=new DBManager();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return instance;
+	}
+
+	public void saveKunde(Kunde kunde) {
+		ResultSet rs;
+		String checkid ="Select * FROM Kunde WHERE KundenNr="+kunde.getKundenNr();
+		String insertstatement="INSERT INTO Kunde VALUES("+kunde.getKundenNr()+",'"+kunde.getVorname()+"','"+kunde.getNachname()+"','"+kunde.getStrasse()+"','"+kunde.getHausnummer()+"','"+kunde.getOrt()+"','"+kunde.getPlz()+"','"+kunde.getGeschlecht()+"'";
+		String upadatestatement="UPDATE Kunde SET Vorname='"+kunde.getVorname()+"', Nachname='"+kunde.getNachname()+"', Straße='"+kunde.getStrasse()+"', Hausnummer='"+kunde.getHausnummer()+"', Ort='"+kunde.getOrt()+"', PLZ='"+kunde.getPlz()+"', Geschlecht='"+kunde.getGeschlecht()+"' WHERE KundenNr="+kunde.getKundenNr();
+		String test="INSERT INTO Kunde VALUES(2000,'Max','Mustermann','Mustergasse',12,'Musterort',1234,'m');";
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			rs = stmt.executeQuery(checkid);
+			if(rs.next() == false){
+				stmt.executeUpdate(insertstatement);
+				System.out.println("Successfully inserted");
+			}
+			else{
+				System.out.println("else ausgelöst");
+				stmt.executeUpdate(upadatestatement);
+				System.out.println("Successfully updated");
+				
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void deleteKunde(Kunde kunde) {
+		String deletestatement="DELETE FROM kunde WHERE KundenNr="+kunde.getKundenNr();
+		
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			stmt.executeUpdate(deletestatement);
+			System.out.println("Succesfully deleted");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
