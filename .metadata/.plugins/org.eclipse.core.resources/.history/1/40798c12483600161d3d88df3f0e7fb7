@@ -1,0 +1,146 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Statement;
+
+public class DBManager {
+	
+	private static DBManager instance;
+	private Connection c;
+	
+	private DBManager() throws SQLException, ClassNotFoundException{
+		Class.forName("com.mysql.jdbc.Driver");
+		 c =DriverManager.getConnection("jdbc:mysql://localhost/buchverleih","root","");
+	}
+	
+	public static DBManager getDBManager(){
+		if(instance==null)
+			try {
+				instance=new DBManager();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return instance;
+	}
+
+	public void saveKunde(Kunde kunde) {
+		ResultSet rs;
+		String checkid ="Select * FROM Kunde WHERE KundenNr="+kunde.getKundenNr();
+		String insertstatement="INSERT INTO Kunde VALUES("+kunde.getKundenNr()+",'"+kunde.getVorname()+"','"+kunde.getNachname()+"','"+kunde.getStrasse()+"','"+kunde.getHausnummer()+"','"+kunde.getOrt()+"','"+kunde.getPlz()+"','"+kunde.getGeschlecht()+"'";
+		String upadatestatement="UPDATE Kunde SET Vorname='"+kunde.getVorname()+"', Nachname='"+kunde.getNachname()+"', Straße='"+kunde.getStrasse()+"', Hausnummer='"+kunde.getHausnummer()+"', Ort='"+kunde.getOrt()+"', PLZ='"+kunde.getPlz()+"', Geschlecht='"+kunde.getGeschlecht()+"' WHERE KundenNr="+kunde.getKundenNr();
+		String test="INSERT INTO Kunde VALUES(2000,'Max','Mustermann','Mustergasse',12,'Musterort',1234,'m');";
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			rs = stmt.executeQuery(checkid);
+			if(rs.next() == false){
+				stmt.executeUpdate(insertstatement);
+				System.out.println("Successfully inserted Kunde");
+			}
+			else{
+				System.out.println("else ausgelöst");
+				stmt.executeUpdate(upadatestatement);
+				System.out.println("Successfully updated Kunde");				
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void deleteKunde(Kunde kunde) {
+		String deletestatement="DELETE FROM kunde WHERE KundenNr="+kunde.getKundenNr();
+		
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			stmt.executeUpdate(deletestatement);
+			System.out.println("Succesfully deleted Kunde");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void readKunde() {
+		String readstatement="Select * FROM Kunde";
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			stmt.executeQuery(readstatement);
+			System.out.println("Kunden:");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void readKunde(Kunde kunde) {
+		
+	}
+
+	public void saveBuch(Buch buch) {
+		ResultSet rs;
+		String checkid ="Select * FROM Buch WHERE BuchNr="+buch.getBuchId();
+		String insertstatement="INSERT INTO Kunde VALUES("+buch.getBuchId()+",'"+buch.getTitel()+"','"+buch.getAutor()+"','"+buch.getVerlag()+"','"+buch.getGenre()+"'";
+		String upadatestatement="UPDATE Kunde SET Titel='"+buch.getTitel()+"', Autor='"+buch.getAutor()+"', Verlag='"+buch.getVerlag()+"', Genre='"+buch.getGenre();
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			rs = stmt.executeQuery(checkid);
+			if(rs.next() == false){
+				stmt.executeUpdate(insertstatement);
+				System.out.println("Successfully inserted Buch");
+			}
+			else{
+				System.out.println("else ausgelöst");
+				stmt.executeUpdate(upadatestatement);
+				System.out.println("Successfully updated Buch");				
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void deleteBuch(Buch buch) {
+		String deletestatement="DELETE FROM buch WHERE BuchNr="+buch.getBuchId();
+		
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			stmt.executeUpdate(deletestatement);
+			System.out.println("Succesfully deleted Buch");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+	}
+
+	public void readBuch() {
+		String readstatement="Select * FROM Buch";
+		try {
+			java.sql.Statement stmt = c.createStatement();
+			stmt.executeQuery(readstatement);
+			System.out.println("Bücher:");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void readKunde(Buch buch) {
+		
+	}
+
+	public void saveVerleih(Verleih verleih) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteVerleih(Verleih verleih) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void readVerleih(Verleih verleih) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+}

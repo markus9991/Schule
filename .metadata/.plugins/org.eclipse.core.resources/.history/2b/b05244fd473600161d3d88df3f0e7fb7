@@ -1,0 +1,47 @@
+import java.util.Date;
+
+public class Verleih extends DBObj{
+	private int verleihNr;
+	private int buchNr;
+	private int kundenNr;
+	private Date von;
+	private Date bis;
+	private Kunde refKunde;
+	private Buch refBuch;
+	
+	public Verleih(int verleihnr, int buchnr, int kundennr, Date von, Date bis, Kunde refkunde, Buch refbuch){
+		this.verleihNr = verleihnr;
+		this.buchNr = buchnr;
+		this.kundenNr = kundennr;
+		this.von = von;
+		this.bis = bis;
+		this.refKunde = refkunde;
+		this.refBuch = refbuch;
+		
+	}
+	
+	public int getVerleihNr() {
+		return verleihNr;
+	}
+	public int getBuchNr() {
+		return buchNr;
+	}
+	public int getKundenNr() {
+		return kundenNr;
+	}
+	public Date getVon() {
+		return von;
+	}
+	public Date getBis() {
+		return bis;
+	}
+	public Kunde getRefKunde() {
+		return refKunde;
+	}
+	public Buch getRefBuch() {
+		return refBuch;
+	}
+	
+	
+
+}
