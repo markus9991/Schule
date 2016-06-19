@@ -1,0 +1,22 @@
+public class db{
+private Db(){}
+private static instance=null;
+public static Db getInstance(){
+if(instance==null) instrance=new Db();
+return instance;
+}
+
+
+Klassen A, B (mit Parent mit Methoden wie save)
+
+verzögertes einlesen es wird erst eingelesen wenn mans braucht.
+
+class A{
+int bId;
+B bref=null;
+
+----------
+B getB(){
+if(bref==null){
+bref=Db.getInstance.readB(BId);
+return bref;

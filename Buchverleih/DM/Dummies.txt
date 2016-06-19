@@ -1,0 +1,23 @@
+﻿
+
+INSERT INTO Buch VALUES(1000,'Das Lied von Eis und Feuer','G.R.R Martin','Piper','Fantasy');
+INSERT INTO Buch VALUES(1001,'Kleine Raupe Nimmersatt','Eric Carle','Ravensburger','Kinderbuch');
+INSERT INTO Buch VALUES(1002,'Der Herr der Ringe','J.R.R. Tolkien', 'Heyne', 'Fantay');
+INSERT INTO Buch VALUES(1003,'Inferno','Dan Brown','CBT','Thriller');
+INSERT INTO Buch VALUES(1004,'FCE Results','Paul A Davies','Oxford','Lehrbuch');
+INSERT INTO Buch VALUES(1005,'Der Hobbit','J.R.R. Tolkien','Clett-Koppa','Fantasy');
+INSERT INTO Buch VALUES(1006,'Guinness World Record 2015','Hoffmann','Ultimate Record','Sachbuch');
+
+
+INSERT INTO Kunde VALUES(2000,'Max','Mustermann','Mustergasse',12,'Musterort',1234,'m');
+INSERT INTO Kunde VALUES(2001,'Simon','Loner','Langstraße',31,'Innsbruck',6020,'m');
+INSERT INTO Kunde VALUES(2002,'John','Cena','Kurzstraße',13,'Outsbruck',2060,'m');
+INSERT INTO Kunde VALUES(2003,'Johannes','Niederwieser','Tiefenweg',23,'Thaur',6065,'m');
+INSERT INTO Kunde VALUES(2004,'Andreas','Hofer','Riesenrundgemälde',1,'Innsbruck',6020,'m');
+INSERT INTO Kunde VALUES(2005,'Richard','Lugner','Lugnercity',12,'Wien',1010,'m');
+INSERT INTO Kunde VALUES(2006,'Phillip','Wischonig','Ostergasse',2,'Götzens',6091,'m');
+INSERT INTO Kunde VALUES(2007,'James','Bond','Bambusstreet',3464,'London',3454,'m');
+INSERT INTO Kunde VALUES(2008,'Queen','Elizabeth','Palast',1,'London',3454,'w');
+INSERT INTO Kunde VALUES(2009,'Ellen','Page','CanalStreet',23,'Los Angeles',234234,'w');
+
+
