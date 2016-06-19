@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
@@ -61,26 +62,54 @@ public class DBManager {
 		}
 	}
 	
-	public void readKunde() {
+	public ArrayList<Kunde> readKunde() {
+		ArrayList<Kunde> kunden = new ArrayList<Kunde>();
+
 		String readstatement="Select * FROM Kunde";
 		try {
+			
 			java.sql.Statement stmt = c.createStatement();
-			stmt.executeQuery(readstatement);
-			System.out.println("Kunden:");
+			ResultSet rs = stmt.executeQuery(readstatement);
+			while(rs.next()){
+				int kundenNr = rs.getInt("KundenNr");
+				String vorname = rs.getString("Vorname");
+				String nachname = rs.getString("Nachname");
+				String strasse = rs.getString("Straße");
+				int hausnummer = rs.getInt("Hausnummer");
+				String ort = rs.getString("Ort");
+				int plz = rs.getInt("PLZ");
+				char geschlecht = rs.getString("Geschlecht").charAt(0);
+				kunden.add(new Kunde(kundenNr, vorname, nachname, strasse, hausnummer, ort,plz, geschlecht, new ArrayList<Verleih>()));
+			}
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return kunden;
 	}
 	
-	public void readKunde(Buch buch) {
+	public ArrayList<Kunde> readKunde(Buch buch) {
+		ArrayList<Kunde> kunden = new ArrayList<Kunde>();
 		String readstatement = "SELECT KundenNr FROM Verleih JOIN Kunde  WHERE KundenNR = "+buch.getBuchId();
 		try {
 			java.sql.Statement stmt = c.createStatement();
-			stmt.executeQuery(readstatement);
-			System.out.println("Kunden, die"+buch.getBuchId()+"ausgeliehen haben:");
+			ResultSet rs = stmt.executeQuery(readstatement);
+			while(rs.next()){
+				int kundenNr = rs.getInt("KundenNr");
+				String vorname = rs.getString("Vorname");
+				String nachname = rs.getString("Nachname");
+				String strasse = rs.getString("Straße");
+				int hausnummer = rs.getInt("Hausnummer");
+				String ort = rs.getString("Ort");
+				int plz = rs.getInt("PLZ");
+				char geschlecht = rs.getString("Geschlecht").charAt(0);
+				kunden.add(new Kunde(kundenNr, vorname, nachname, strasse, hausnummer, ort,plz, geschlecht, new ArrayList<Verleih>()));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return kunden;
 	}
 
 	public void saveBuch(Buch buch) {
@@ -118,26 +147,44 @@ public class DBManager {
 		}		
 	}
 
-	public void readBuch() {
+	public ArrayList<Buch> readBuch() {
+		ArrayList<Buch> buecher = new ArrayList<Buch>();
 		String readstatement="Select * FROM Buch";
 		try {
 			java.sql.Statement stmt = c.createStatement();
-			stmt.executeQuery(readstatement);
-			System.out.println("Bücher:");
+			ResultSet rs = stmt.executeQuery(readstatement);
+			while(rs.next()){
+				int buchId = rs.getInt("BuchId");
+				String titel = rs.getString("Titel");
+				String autor = rs.getString("Autor");
+				String verlag = rs.getString("Verlag");
+				String genre = rs.getString("Genre");
+				buecher.add(new Buch(buchId, titel, autor, verlag, genre, new ArrayList<Verleih>()));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return buecher;
 	}
 	
-	public void readBuch(Kunde kunde) {
+	public ArrayList<Buch> readBuch(Kunde kunde) {
+		ArrayList<Buch> buecher = new ArrayList<Buch>();
 		String readstatement = "Select BuchId FROM Verleih JOIN Kunde  WHERE KundenNR = "+kunde.getKundenNr();  
 		try {
 			java.sql.Statement stmt = c.createStatement();
-			stmt.executeQuery(readstatement);
-			System.out.println("Bücher, die"+kunde.getKundenNr()+"ausgeliehen hat:");
+			ResultSet rs = stmt.executeQuery(readstatement);
+			while(rs.next()){
+				int buchId = rs.getInt("BuchId");
+				String titel = rs.getString("Titel");
+				String autor = rs.getString("Autor");
+				String verlag = rs.getString("Verlag");
+				String genre = rs.getString("Genre");
+				buecher.add(new Buch(buchId, titel, autor, verlag, genre, new ArrayList<Verleih>()));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return buecher;
 	}
 
 	public void saveVerleih(Verleih verleih) {

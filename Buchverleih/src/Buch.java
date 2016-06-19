@@ -29,10 +29,6 @@ public class Buch extends DBObj{
 		DBManager.getDBManager().deleteBuch(this);
 	}
 	
-	public void read(){
-		DBManager.getDBManager().readBuch();
-	}
-
 	public int getBuchId() {
 		return buchId;
 	}

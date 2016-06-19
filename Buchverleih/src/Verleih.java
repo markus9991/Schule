@@ -28,10 +28,6 @@ public class Verleih extends DBObj{
 		DBManager.getDBManager().deleteVerleih(this);
 	}
 	
-	/*public void read(){
-		DBManager.getDBManager().readVerleih(this);
-	}*/
-	
 	public int getVerleihNr() {
 		return verleihNr;
 	}

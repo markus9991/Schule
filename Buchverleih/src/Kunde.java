@@ -38,9 +38,6 @@ public class Kunde extends DBObj {
 		DBManager.getDBManager().deleteKunde(this);
 	}
 	
-	public void read(){
-		DBManager.getDBManager().readKunde();
-	}
 
 	public int getKundenNr() {
 		return kundenNr;
