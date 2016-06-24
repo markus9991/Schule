@@ -70,5 +70,9 @@ public class Kunde extends DBObj {
 	public ArrayList<Verleih> getVerleihe() {
 		return verleihe;
 	}
+	
+	public String toString(){
+		return this.kundenNr+"\t|"+this.vorname+"\t|"+this.nachname+"\t|"+this.strasse+"\t|"+this.hausnummer+"\t|"+this.ort+"\t|"+this.plz+"\t|"+this.geschlecht;
+	}
 
 }

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class DBManager {
@@ -33,17 +34,32 @@ public class DBManager {
 		String upadatestatement="UPDATE Kunde SET Vorname='"+kunde.getVorname()+"', Nachname='"+kunde.getNachname()+"', Straße='"+kunde.getStrasse()+"', Hausnummer='"+kunde.getHausnummer()+"', Ort='"+kunde.getOrt()+"', PLZ='"+kunde.getPlz()+"', Geschlecht='"+kunde.getGeschlecht()+"' WHERE KundenNr="+kunde.getKundenNr();
 		String test="INSERT INTO Kunde VALUES(2000,'Max','Mustermann','Mustergasse',12,'Musterort',1234,'m');";
 		try {
+			String pstr="Insert into Kunde values(?,?,?,?,?,?,?,?)";
+			java.sql.PreparedStatement pstmt=c.prepareStatement(pstr);
+			pstmt.setInt(1,kunde.getKundenNr());
+			pstmt.setString(2, kunde.getVorname());
+			pstmt.setString(3, kunde.getNachname());
+			pstmt.setString(4, kunde.getStrasse());
+			pstmt.setInt(5, kunde.getHausnummer());
+			pstmt.setString(6, kunde.getOrt());
+			pstmt.setInt(7, kunde.getPlz());
+			pstmt.setString(8, String.valueOf(kunde.getGeschlecht()));
+			
+			
 			java.sql.Statement stmt = c.createStatement();
 			rs = stmt.executeQuery(checkid);
 			if(rs.next() == false){
-				stmt.executeUpdate(insertstatement);
+//				stmt.executeUpdate(insertstatement);
+				pstmt.executeUpdate();
 				System.out.println("Successfully inserted Kunde");
 			}
 			else{
-				System.out.println("else ausgelöst");
 				stmt.executeUpdate(upadatestatement);
 				System.out.println("Successfully updated Kunde");				
 		}
+			rs.close();
+			stmt.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -56,10 +72,13 @@ public class DBManager {
 		try {
 			java.sql.Statement stmt = c.createStatement();
 			stmt.executeUpdate(deletestatement);
+			stmt.close();
 			System.out.println("Succesfully deleted Kunde");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public ArrayList<Kunde> readKunde() {
@@ -81,11 +100,12 @@ public class DBManager {
 				char geschlecht = rs.getString("Geschlecht").charAt(0);
 				kunden.add(new Kunde(kundenNr, vorname, nachname, strasse, hausnummer, ort,plz, geschlecht, new ArrayList<Verleih>()));
 			}
-			
-			
+			rs.close();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Successfully alle Kunden gelesen");
 		return kunden;
 	}
 	
@@ -105,6 +125,9 @@ public class DBManager {
 				int plz = rs.getInt("PLZ");
 				char geschlecht = rs.getString("Geschlecht").charAt(0);
 				kunden.add(new Kunde(kundenNr, vorname, nachname, strasse, hausnummer, ort,plz, geschlecht, new ArrayList<Verleih>()));
+				
+				stmt.close();
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,12 +139,20 @@ public class DBManager {
 		ResultSet rs;
 		String checkid ="Select * FROM Buch WHERE BuchId="+buch.getBuchId();
 		String insertstatement="INSERT INTO Buch VALUES("+buch.getBuchId()+",'"+buch.getTitel()+"','"+buch.getAutor()+"','"+buch.getVerlag()+"','"+buch.getGenre()+"'";
-		String upadatestatement="UPDATE Kunde SET Titel='"+buch.getTitel()+"', Autor='"+buch.getAutor()+"', Verlag='"+buch.getVerlag()+"', Genre='"+buch.getGenre();
+		String upadatestatement="UPDATE Buch SET Titel='"+buch.getTitel()+"', Autor='"+buch.getAutor()+"', Verlag='"+buch.getVerlag()+"', Genre='"+buch.getGenre()+"'";
 		try {
+			String pstr="Insert into Buch values(?,?,?,?,?)";
+			java.sql.PreparedStatement pstmt =c.prepareStatement(pstr);
+			pstmt.setInt(1, buch.getBuchId());
+			pstmt.setString(2, buch.getTitel());
+			pstmt.setString(3, buch.getAutor());
+			pstmt.setString(4, buch.getVerlag());
+			pstmt.setString(5, buch.getGenre());
 			java.sql.Statement stmt = c.createStatement();
 			rs = stmt.executeQuery(checkid);
 			if(rs.next() == false){
-				stmt.executeUpdate(insertstatement);
+//				stmt.executeUpdate(insertstatement);
+				pstmt.executeUpdate();
 				System.out.println("Successfully inserted Buch");
 			}
 			else{
@@ -129,6 +160,8 @@ public class DBManager {
 				stmt.executeUpdate(upadatestatement);
 				System.out.println("Successfully updated Buch");				
 		}
+			stmt.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -142,6 +175,8 @@ public class DBManager {
 			java.sql.Statement stmt = c.createStatement();
 			stmt.executeUpdate(deletestatement);
 			System.out.println("Succesfully deleted Buch");
+			
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
@@ -160,6 +195,7 @@ public class DBManager {
 				String verlag = rs.getString("Verlag");
 				String genre = rs.getString("Genre");
 				buecher.add(new Buch(buchId, titel, autor, verlag, genre, new ArrayList<Verleih>()));
+				stmt.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,6 +216,7 @@ public class DBManager {
 				String verlag = rs.getString("Verlag");
 				String genre = rs.getString("Genre");
 				buecher.add(new Buch(buchId, titel, autor, verlag, genre, new ArrayList<Verleih>()));
+				stmt.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -202,7 +239,8 @@ public class DBManager {
 			else{
 				System.out.println("else ausgelöst");
 				stmt.executeUpdate(upadatestatement);
-				System.out.println("Successfully updated Verleih");				
+				System.out.println("Successfully updated Verleih");		
+				stmt.close();
 		}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -217,13 +255,21 @@ public class DBManager {
 			java.sql.Statement stmt = c.createStatement();
 			stmt.executeUpdate(deletestatement);
 			System.out.println("Succesfully deleted Verleih");
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 		
 	}
 
-
+	public void close(){
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 }
