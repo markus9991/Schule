@@ -1,0 +1,4 @@
+/*imperative program*/
+  /*imperative program*/
+  void main() {linksUm();schreib("Hi");
+  }
