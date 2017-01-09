@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="lib/formatter.jar"/>
 	<classpathentry kind="lib" path="lib/gluegen-rt-natives-linux-amd64.jar"/>
 	<classpathentry kind="lib" path="lib/error_prone_annotations-2.0.16-20161202.224820-1.jar"/>
+	<classpathentry kind="lib" path="lib/guava-20.0.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
