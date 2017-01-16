@@ -7,6 +7,10 @@ import de.hamster.model.HamsterFile;
 
 public class ham2java {
 
+	/**
+	 * HUHU
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		 if (args  .length != 1) {
 			System.out.println("Aufruf: java -classpath hamstersimulator.jar;tools.jar "
